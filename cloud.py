@@ -9,14 +9,13 @@ def list_base_images():
 
 
 @task(ignore_result=True)
-def create_instance(base_image, name, instance, cpu_cores, memory, storage):
-	# get ip
-	# get ssh keys
+def create_instance(base_image, domain, instance, cpu_cores, memory, storage, mac_addr):
 	print call([
 		'virt-clone',
 		'--original', base_image,
-		'--name', name,
-		'--file',  settings.CLOUD_VM_DIR + '/' + name + '.qcow2'
+		'--name', domain,
+		'--mac', mac_addr,
+		'--file',  settings.CLOUD_VM_DIR + '/' + domain + '.qcow2'
 	])
 	# migrate to destination system
 
